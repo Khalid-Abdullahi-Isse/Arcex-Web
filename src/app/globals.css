@@ -1,0 +1,344 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-geist-sans);
+
+  --color-pf-bg-base: var(--pf-bg-base);
+  --color-pf-bg-shell: var(--pf-bg-shell);
+  --color-pf-bg-surface: var(--pf-bg-surface);
+  --color-pf-bg-elevated: var(--pf-bg-elevated);
+  --color-pf-border-default: var(--pf-border-default);
+  --color-pf-border-subtle: var(--pf-border-subtle);
+  --color-pf-border-accent: var(--pf-border-accent);
+  --color-pf-text-primary: var(--pf-text-primary);
+  --color-pf-text-secondary: var(--pf-text-secondary);
+  --color-pf-text-tertiary: var(--pf-text-tertiary);
+  --color-pf-text-hint: var(--pf-text-hint);
+  --color-pf-accent: var(--pf-accent-default);
+  --color-pf-accent-muted: var(--pf-accent-muted);
+  --color-pf-accent-subtle: var(--pf-accent-subtle);
+  --color-pf-wordmark: var(--pf-wordmark-accent);
+  --color-pf-success: var(--pf-success-default);
+  --color-pf-success-subtle: var(--pf-success-subtle);
+  --color-pf-danger: var(--pf-danger-default);
+  --color-pf-danger-subtle: var(--pf-danger-subtle);
+  --color-pf-pending: var(--pf-status-pending);
+  --color-pf-sold: var(--pf-status-sold);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--pf-bg-shell);
+  --color-sidebar-foreground: var(--pf-text-primary);
+  --color-sidebar-primary: var(--primary);
+  --color-sidebar-primary-foreground: var(--primary-foreground);
+  --color-sidebar-accent: var(--pf-bg-elevated);
+  --color-sidebar-accent-foreground: var(--pf-text-primary);
+  --color-sidebar-border: var(--pf-border-subtle);
+  --color-sidebar-ring: var(--ring);
+  --color-chart-1: var(--pf-accent-default);
+  --color-chart-2: var(--pf-success-default);
+  --color-chart-3: var(--pf-status-pending);
+  --color-chart-4: var(--pf-danger-default);
+  --color-chart-5: var(--pf-text-tertiary);
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+}
+
+/* ---------------------------------- */
+/* Light mode (default) - Terracotta Terrain */
+/* ---------------------------------- */
+:root {
+  --pf-bg-base: #f8f9fa;
+  --pf-bg-shell: #f3f4f5;
+  --pf-bg-surface: #ffffff;
+  --pf-bg-elevated: #edeeef;
+  --pf-border-default: #dfc0b5;
+  --pf-border-subtle: #e1e3e4;
+  --pf-border-accent: #c2521b;
+  --pf-text-primary: #191c1d;
+  --pf-text-secondary: #57423a;
+  --pf-text-tertiary: #8b7268;
+  --pf-text-hint: #8b7268;
+  --pf-accent-default: #a13a00;
+  --pf-accent-muted: #c2521b;
+  --pf-accent-subtle: #ffdbce;
+  --pf-wordmark-accent: #a13a00;
+  --pf-success-default: #006947;
+  --pf-success-subtle: rgba(0, 105, 71, 0.12);
+  --pf-danger-default: #ba1a1a;
+  --pf-danger-subtle: #ffdad6;
+  --pf-status-pending: #555f6f;
+  --pf-status-sold: #596373;
+
+  --background: #f8f9fa;
+  --foreground: #191c1d;
+  --card: #ffffff;
+  --card-foreground: #191c1d;
+  --popover: #ffffff;
+  --popover-foreground: #191c1d;
+  --primary: #a13a00;
+  --primary-foreground: #ffffff;
+  --secondary: #d6e0f3;
+  --secondary-foreground: #596373;
+  --muted: #edeeef;
+  --muted-foreground: #57423a;
+  --accent: #ffdbce;
+  --accent-foreground: #7e2c00;
+  --destructive: #ba1a1a;
+  --border: #dfc0b5;
+  --input: #dfc0b5;
+  --ring: #c2521b;
+
+  --radius: 8px;
+
+  --pf-avatar-1-bg: #ffdbce;
+  --pf-avatar-1-text: #7e2c00;
+  --pf-avatar-2-bg: #d9e3f6;
+  --pf-avatar-2-text: #3d4756;
+  --pf-avatar-3-bg: #6ffbbe;
+  --pf-avatar-3-text: #005236;
+  --pf-avatar-4-bg: #edeeef;
+  --pf-avatar-4-text: #57423a;
+  --pf-avatar-5-bg: #ffdad6;
+  --pf-avatar-5-text: #93000a;
+  --pf-avatar-6-bg: #e1e3e4;
+  --pf-avatar-6-text: #596373;
+
+  scrollbar-color: #8b7268 transparent;
+}
+
+/* ---------------------------------- */
+/* Dark mode                          */
+/* ---------------------------------- */
+.dark {
+  --pf-bg-base: #191c1d;
+  --pf-bg-shell: #2e3132;
+  --pf-bg-surface: #2e3132;
+  --pf-bg-elevated: #3a3d3e;
+  --pf-border-default: #8b7268;
+  --pf-border-subtle: #57423a;
+  --pf-border-accent: #ffb598;
+  --pf-text-primary: #f0f1f2;
+  --pf-text-secondary: #e1e3e4;
+  --pf-text-tertiary: #d9dadb;
+  --pf-text-hint: #d9dadb;
+  --pf-accent-default: #ffb598;
+  --pf-accent-muted: #ffdbce;
+  --pf-accent-subtle: rgba(255, 181, 152, 0.16);
+  --pf-wordmark-accent: #ffb598;
+  --pf-success-default: #4edea3;
+  --pf-success-subtle: rgba(78, 222, 163, 0.16);
+  --pf-danger-default: #ffb4ab;
+  --pf-danger-subtle: rgba(255, 218, 214, 0.14);
+  --pf-status-pending: #bdc7d9;
+  --pf-status-sold: #d9e3f6;
+
+  --background: var(--pf-bg-base);
+  --foreground: var(--pf-text-primary);
+  --card: var(--pf-bg-surface);
+  --card-foreground: var(--pf-text-primary);
+  --popover: var(--pf-bg-elevated);
+  --popover-foreground: var(--pf-text-primary);
+  --primary: var(--pf-accent-default);
+  --primary-foreground: #370e00;
+  --secondary: var(--pf-bg-elevated);
+  --secondary-foreground: var(--pf-text-secondary);
+  --muted: var(--pf-bg-elevated);
+  --muted-foreground: var(--pf-text-tertiary);
+  --accent: rgba(255, 181, 152, 0.16);
+  --accent-foreground: var(--pf-text-primary);
+  --destructive: var(--pf-danger-default);
+  --border: var(--pf-border-default);
+  --input: var(--pf-border-default);
+  --ring: var(--pf-accent-muted);
+
+  --pf-avatar-1-bg: rgba(255, 181, 152, 0.16);
+  --pf-avatar-1-text: #ffb598;
+  --pf-avatar-2-bg: rgba(217, 227, 246, 0.14);
+  --pf-avatar-2-text: #bdc7d9;
+  --pf-avatar-3-bg: rgba(78, 222, 163, 0.14);
+  --pf-avatar-3-text: #4edea3;
+  --pf-avatar-4-bg: rgba(225, 227, 228, 0.12);
+  --pf-avatar-4-text: #e1e3e4;
+  --pf-avatar-5-bg: rgba(255, 218, 214, 0.14);
+  --pf-avatar-5-text: #ffb4ab;
+  --pf-avatar-6-bg: rgba(189, 199, 217, 0.14);
+  --pf-avatar-6-text: #bdc7d9;
+
+  scrollbar-color: #8b7268 transparent;
+}
+
+@layer base {
+  /* Slightly larger global scale: all rem-based sizes (text, buttons, cards,
+     spacing) scale from this. 106.25% = 17px base instead of 16px. */
+  html {
+    font-size: 106.25%;
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    /* Geist is a variable font: 450 renders slightly stronger text than the
+       400 default without jumping to medium. */
+    font-weight: 450;
+  }
+
+  h1 {
+    @apply text-[19px] font-semibold;
+  }
+  h2 {
+    @apply text-[16px] font-semibold;
+  }
+
+  label {
+    @apply text-[13px] font-medium text-pf-text-secondary;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+  }
+
+  button,
+  [role="button"],
+  [role="tab"],
+  [role="menuitem"],
+  [role="menuitemcheckbox"],
+  [role="menuitemradio"],
+  [role="option"],
+  [data-slot="select-trigger"],
+  [data-slot="tabs-trigger"] {
+    cursor: pointer !important;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button,
+  a,
+  [role="button"],
+  [role="tab"],
+  [role="menuitem"],
+  [role="option"],
+  [data-slot="button"],
+  [data-slot="tabs-trigger"],
+  [data-slot="select-trigger"] {
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+}
+
+/* Theme switch transition — applied temporarily by ThemeToggle */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease,
+    box-shadow 0.5s ease, fill 0.5s ease, stroke 0.5s ease,
+    outline-color 0.5s ease, scrollbar-color 0.5s ease !important;
+}
+
+/* Hide scrollbar but keep scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Safe-area padding for the mobile tab bar */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Branded route loader — three orbiting orbs */
+.loading-orb {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  margin-top: -7px;
+  margin-left: -7px;
+}
+
+.loading-orb-1 {
+  background: var(--pf-accent-default);
+  animation: loading-orbit 1.4s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+.loading-orb-2 {
+  background: var(--pf-success-default);
+  animation: loading-orbit 1.4s cubic-bezier(0.5, 0, 0.5, 1) -0.47s infinite;
+}
+
+.loading-orb-3 {
+  background: var(--pf-wordmark-accent);
+  animation: loading-orbit 1.4s cubic-bezier(0.5, 0, 0.5, 1) -0.93s infinite;
+}
+
+@keyframes loading-orbit {
+  0% {
+    transform: translate(0, -24px) scale(1);
+    opacity: 1;
+  }
+  25% {
+    transform: translate(24px, 0) scale(0.7);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(0, 24px) scale(1);
+    opacity: 1;
+  }
+  75% {
+    transform: translate(-24px, 0) scale(0.7);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(0, -24px) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Image fade-in once loaded */
+@keyframes img-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.img-fade-in {
+  animation: img-fade-in 0.5s ease forwards;
+}
