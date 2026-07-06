@@ -74,3 +74,34 @@ export interface UploadUrlResponse {
 export interface PendingDocument extends ListingDocument {
   listing: Listing & { seller: User };
 }
+
+export interface SalesSummary {
+  totalSales: number;
+  totalValue: number;
+  avgPrice: number;
+}
+
+export interface SalesTrendPoint {
+  period: string;
+  count: number;
+  totalValue: number;
+}
+
+export interface SalesByRegion {
+  region: string;
+  count: number;
+  totalValue: number;
+  avgPrice: number;
+}
+
+export interface StatusBreakdown {
+  pendingReview: number;
+  approved: number;
+  sold: number;
+  rejected: number;
+}
+
+export interface ListedVsSoldValue {
+  totalListedValue: number;
+  totalSoldValue: number;
+}

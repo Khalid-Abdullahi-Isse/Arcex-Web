@@ -19,7 +19,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { api, isApiError } from "@/lib/api";
-import { registerSchema, type RegisterValues } from "@/lib/validators";
+import {
+  registerSchema,
+  type RegisterInputValues,
+  type RegisterValues,
+} from "@/lib/validators";
 import { useAuthStore } from "@/store/auth";
 import type { AuthTokens, User } from "@/types/api";
 
@@ -30,7 +34,7 @@ export default function RegisterPage() {
   const [serverError, setServerError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
 
-  const form = useForm<RegisterValues>({
+  const form = useForm<RegisterInputValues, unknown, RegisterValues>({
     resolver: zodResolver(registerSchema),
     defaultValues: { name: "", phone: "", email: "", password: "", role: "USER" },
   });

@@ -1,0 +1,27 @@
+<svg width="640" height="200" viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="markGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F6E5B"/>
+      <stop offset="100%" stop-color="#0B4F42"/>
+    </linearGradient>
+    <linearGradient id="pinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E8A93B"/>
+      <stop offset="100%" stop-color="#C98A22"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(20, 20)">
+    <rect x="0" y="0" width="160" height="160" rx="28" fill="url(#markGrad)"/>
+    <path d="M40 20 L40 180 M120 20 L120 140" stroke="#ffffff" stroke-opacity="0.18" stroke-width="6" stroke-linecap="round" transform="translate(0,-10)"/>
+    <path d="M28 28 L132 132 M132 28 L28 132" stroke="#ffffff" stroke-opacity="0.14" stroke-width="7" stroke-linecap="round"/>
+    <g transform="translate(80, 76)">
+      <path d="M0 -46 C26 -46 46 -26 46 0 C46 30 0 62 0 62 C0 62 -46 30 -46 0 C-46 -26 -26 -46 0 -46 Z" fill="url(#pinGrad)" stroke="#ffffff" stroke-width="4"/>
+      <circle cx="0" cy="-2" r="15" fill="#0B4F42"/>
+    </g>
+  </g>
+
+  <g transform="translate(210, 0)">
+    <text x="0" y="120" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="86" fill="#0B4F42" letter-spacing="1">Acre<tspan fill="#E8A93B">X</tspan></text>
+    <text x="4" y="150" font-family="Arial, Helvetica, sans-serif" font-weight="500" font-size="22" fill="#5A6B65" letter-spacing="3">FIND LAND. LIST LAND.</text>
+  </g>
+</svg>

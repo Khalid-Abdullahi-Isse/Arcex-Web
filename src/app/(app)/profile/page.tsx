@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { LogOut, Moon, ShieldCheck, Sun } from "lucide-react";
@@ -38,6 +38,7 @@ export default function ProfilePage() {
     resolver: zodResolver(profileSchema),
     defaultValues: { name: "", region: "" },
   });
+  const region = useWatch({ control: form.control, name: "region" });
 
   useEffect(() => {
     if (user) {
@@ -61,8 +62,6 @@ export default function ProfilePage() {
       toast.error(isApiError(err) ? err.message : "Couldn't save profile");
     }
   });
-
-  const region = form.watch("region");
 
   return (
     <div className="mx-auto w-full max-w-[560px] space-y-6">

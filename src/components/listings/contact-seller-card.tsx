@@ -11,13 +11,18 @@ export function ContactSellerCard({
   listing,
 }: {
   seller: User;
-  listing?: Pick<Listing, "title" | "region" | "district">;
+  listing?: Pick<Listing, "id" | "title" | "region" | "district">;
 }) {
   const [revealed, setRevealed] = useState(false);
+  const configuredUrl = process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, "");
+  const listingUrl = listing
+    ? `${configuredUrl || ""}/listings/${listing.id}`
+    : "";
+
   const whatsappText = listing
     ? `Hi ${seller.name}, I saw your AcreX listing "${listing.title}" in ${listing.region}${
         listing.district ? `, ${listing.district}` : ""
-      } and would like to know more.`
+      } and would like to know more.${listingUrl ? `\n\nLink: ${listingUrl}` : ""}`
     : `Hi ${seller.name}, I saw your AcreX listing and would like to know more.`;
   const whatsappHref = `https://wa.me/${whatsappDigits(seller.phone)}?text=${encodeURIComponent(
     whatsappText,

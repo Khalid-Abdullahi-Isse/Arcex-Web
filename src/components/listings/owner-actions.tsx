@@ -4,11 +4,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSWRConfig } from "swr";
 import { toast } from "sonner";
-import { CheckCircle2, Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ConfirmDialog } from "@/components/shared/confirm-dialog";
 import { api, isApiError } from "@/lib/api";
 import type { Listing } from "@/types/api";
+import { MarkSoldDialog } from "@/components/listings/mark-sold-dialog";
 
 export function OwnerActions({ listing }: { listing: Listing }) {
   const router = useRouter();
@@ -37,26 +38,7 @@ export function OwnerActions({ listing }: { listing: Listing }) {
         }
       />
       {listing.status !== "SOLD" ? (
-        <ConfirmDialog
-          title="Mark as sold?"
-          description="The listing will be archived and hidden from public browse. This can't be undone from the app."
-          confirmLabel="Mark sold"
-          onConfirm={async () => {
-            try {
-              await api.patch(`/listings/${listing.id}/sold`);
-              await refresh();
-              toast.success("Marked as sold");
-            } catch (err) {
-              toast.error(isApiError(err) ? err.message : "Couldn't mark as sold");
-            }
-          }}
-          trigger={
-            <Button variant="secondary" size="sm">
-              <CheckCircle2 size={13} strokeWidth={1.75} data-icon="inline-start" />
-              Mark sold
-            </Button>
-          }
-        />
+        <MarkSoldDialog listing={listing} onDone={refresh} />
       ) : null}
       <ConfirmDialog
         destructive

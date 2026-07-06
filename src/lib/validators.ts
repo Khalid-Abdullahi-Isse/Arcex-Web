@@ -24,6 +24,7 @@ export const registerSchema = z.object({
   role: z.enum(["USER", "ADMIN"]).default("USER"),
 });
 
+export type RegisterInputValues = z.input<typeof registerSchema>;
 export type RegisterValues = z.infer<typeof registerSchema>;
 
 export const loginSchema = z.object({
@@ -84,6 +85,46 @@ export function listingPayload(values: ListingFormValues) {
 }
 
 export type ListingValues = z.infer<typeof listingSchema>;
+
+export const markSoldSchema = z.object({
+  salePrice: requiredNumeric("Sale price must be at least 0.01", (n) => n >= 0.01),
+  saleDate: z
+    .string()
+    .min(1, "Sale date is required")
+    .refine((value) => {
+      const date = new Date(value);
+      const today = new Date();
+      today.setHours(23, 59, 59, 999);
+      return Number.isFinite(date.getTime()) && date <= today;
+    }, "Sale date cannot be in the future"),
+  paymentMethod: z.string().trim().min(2, "Payment method is required"),
+  documentReference: z.string().trim().optional(),
+  buyerName: z.string().trim().min(2, "Buyer name must be at least 2 characters"),
+  buyerPhone: phoneSchema,
+  buyerEmail: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .optional()
+    .refine((value) => !value || z.email().safeParse(value).success, {
+      message: "Enter a valid email",
+    }),
+});
+
+export type MarkSoldInputValues = z.input<typeof markSoldSchema>;
+export type MarkSoldValues = z.infer<typeof markSoldSchema>;
+
+export function markSoldPayload(values: MarkSoldValues) {
+  return {
+    salePrice: Number(values.salePrice),
+    saleDate: values.saleDate,
+    paymentMethod: values.paymentMethod.trim(),
+    documentReference: values.documentReference?.trim() || undefined,
+    buyerName: values.buyerName.trim(),
+    buyerPhone: values.buyerPhone,
+    buyerEmail: values.buyerEmail?.trim() || undefined,
+  };
+}
 
 export const profileSchema = z.object({
   name: z.string().trim().min(2, "Name must be at least 2 characters"),

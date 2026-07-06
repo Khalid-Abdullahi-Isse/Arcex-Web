@@ -14,12 +14,26 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"),
+  applicationName: "AcreX",
   title: {
-    default: "acrex — land, verified.",
-    template: "%s — acrex",
+    default: "AcreX - Land, verified.",
+    template: "%s - AcreX",
   },
   description:
     "Buy and sell land across Somalia. Every listing is reviewed with its title documents before going live.",
+  icons: {
+    icon: "/acrex-icon.svg",
+    shortcut: "/acrex-icon.svg",
+    apple: "/acrex-icon.svg",
+  },
+  openGraph: {
+    title: "AcreX - Land, verified.",
+    description:
+      "Buy and sell land across Somalia. Every listing is reviewed with its title documents before going live.",
+    siteName: "AcreX",
+    images: ["/acrex-logo.svg"],
+  },
 };
 
 export default function RootLayout({

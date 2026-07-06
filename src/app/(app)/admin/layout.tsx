@@ -18,7 +18,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <EmptyState
           icon={ShieldAlert}
           title="Admin access required"
-          description="This area is for the acrex review team. If you should have access, ask an existing admin to upgrade your account."
+          description="This area is for the AcreX review team. If you should have access, ask an existing admin to upgrade your account."
         />
       </div>
     );

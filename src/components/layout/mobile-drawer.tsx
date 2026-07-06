@@ -98,7 +98,7 @@ export function MobileDrawer() {
           <DrawerLink href="/favorites" icon={<Heart size={16} strokeWidth={1.75} />} label="Favorites" active={pathname === "/favorites"} onNavigate={close} />
           {isLoggedIn ? (
             <>
-              <DrawerLink href="/sell" icon={<PlusCircle size={16} strokeWidth={1.75} />} label="Post land" active={pathname === "/sell"} onNavigate={close} />
+              <DrawerLink href="/sell" icon={<PlusCircle size={16} strokeWidth={1.75} />} label="Post land" active={pathname.startsWith("/sell")} onNavigate={close} />
               <DrawerLink href="/my-ads" icon={<LandPlot size={16} strokeWidth={1.75} />} label="My ads" active={pathname === "/my-ads"} onNavigate={close} />
               <DrawerLink href="/profile" icon={<CircleUserRound size={16} strokeWidth={1.75} />} label="Profile" active={pathname === "/profile"} onNavigate={close} />
             </>

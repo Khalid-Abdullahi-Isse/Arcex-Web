@@ -64,7 +64,7 @@ function LoginForm() {
       error={serverError}
       footer={
         <>
-          New to acrex?{" "}
+          New to AcreX?{" "}
           <Link href="/register" className="font-medium text-pf-accent hover:underline">
             Create an account
           </Link>

@@ -1,15 +1,15 @@
-# acrex — web
+# AcreX web
 
-Next.js frontend for the acrex land marketplace backend (`../backend`).
+Next.js frontend for the AcreX land marketplace backend (`../backend`).
 
 Design system: Tailwind v4 (CSS-first) + shadcn/ui (base-nova) restyled to an
-orange/terracotta identity — hairline `0.5px` borders, flat shadowless cards,
-compact 11–18px type at weights 400/500, light mode default with a dark toggle.
+orange/terracotta identity: hairline `0.5px` borders, flat shadowless cards,
+compact 11-18px type at weights 400/500, light mode default with a dark toggle.
 
 ## Run
 
 ```bash
-# 1. backend (from ../backend) — needs Postgres with the arcex/acrex role+db
+# 1. backend (from ../backend) - needs Postgres with the arcex/acrex role+db
 npm run start:dev
 
 # 2. web
@@ -23,10 +23,32 @@ npm run dev        # http://localhost:3000
 | ------------- | ----------------------- | ----------------------------------------- |
 | `BACKEND_URL` | `http://localhost:4000` | Target of the `/api/backend/:path*` proxy |
 
-All browser traffic — JSON, file uploads (PUT), and image downloads — flows
-through the `/api/backend` rewrite in `next.config.ts`. The backend issues
+All browser traffic, including JSON, file uploads (PUT), and image downloads,
+flows through the `/api/backend` rewrite in `next.config.ts`. The backend issues
 upload/file URLs already prefixed with `/api/backend/...`, so the proxy is
 required for photos and documents to work.
+
+## Deploy to Vercel
+
+Import the `web` directory as the Vercel project root. The project includes
+`vercel.json` with the Next.js preset and npm build commands.
+
+Set this environment variable in Vercel:
+
+| Variable      | Example                       | Purpose                                   |
+| ------------- | ----------------------------- | ----------------------------------------- |
+| `BACKEND_URL` | `https://api.your-domain.com` | Public URL for the deployed backend proxy |
+
+Build settings should be:
+
+| Setting             | Value           |
+| ------------------- | --------------- |
+| Framework Preset    | `Next.js`       |
+| Install Command     | `npm install`   |
+| Build Command       | `npm run build` |
+| Development Command | `npm run dev`   |
+
+Leave the output directory unset so Vercel uses the Next.js default.
 
 ## Seed accounts
 
@@ -35,7 +57,7 @@ required for photos and documents to work.
 | amina@example.com | +252611111111 | `Password123!` | USER                                         |
 | omar@example.com  | +252622222222 | `Password123!` | USER (promote to ADMIN for the review queue) |
 
-Promote an admin (role is embedded in the JWT — log in again afterwards):
+Promote an admin (role is embedded in the JWT; log in again afterwards):
 
 ```sql
 UPDATE "User" SET role='ADMIN' WHERE email='omar@example.com';
@@ -43,7 +65,7 @@ UPDATE "User" SET role='ADMIN' WHERE email='omar@example.com';
 
 ## Notes
 
-- Favorites are stored locally (zustand + localStorage) — the backend has no
+- Favorites are stored locally (zustand + localStorage); the backend has no
   favorites endpoint yet.
 - There is no messaging; buyers contact sellers via the phone number on the
   listing (call / WhatsApp).

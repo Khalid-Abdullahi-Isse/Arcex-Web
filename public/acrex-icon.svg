@@ -1,0 +1,20 @@
+<svg width="192" height="192" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="markGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F6E5B"/>
+      <stop offset="100%" stop-color="#0B4F42"/>
+    </linearGradient>
+    <linearGradient id="pinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E8A93B"/>
+      <stop offset="100%" stop-color="#C98A22"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="16" y="16" width="160" height="160" rx="28" fill="url(#markGrad)"/>
+  <path d="M56 26 L56 186 M136 26 L136 146" stroke="#ffffff" stroke-opacity="0.18" stroke-width="6" stroke-linecap="round"/>
+  <path d="M44 44 L148 148 M148 44 L44 148" stroke="#ffffff" stroke-opacity="0.14" stroke-width="7" stroke-linecap="round"/>
+  <g transform="translate(96, 92)">
+    <path d="M0 -46 C26 -46 46 -26 46 0 C46 30 0 62 0 62 C0 62 -46 30 -46 0 C-46 -26 -26 -46 0 -46 Z" fill="url(#pinGrad)" stroke="#ffffff" stroke-width="4"/>
+    <circle cx="0" cy="-2" r="15" fill="#0B4F42"/>
+  </g>
+</svg>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import {
@@ -15,6 +15,7 @@ import {
   PlusCircle,
   ShieldCheck,
   FileCheck2,
+  ChartNoAxesCombined,
 } from "lucide-react";
 import { Logo } from "@/components/layout/logo";
 import { useMe } from "@/hooks/use-me";
@@ -25,6 +26,16 @@ import { cn } from "@/lib/utils";
 
 const EXPANDED = 228;
 const COLLAPSED = 60;
+const HOVER_MEDIA = "(hover: hover) and (pointer: fine)";
+
+function subscribeToHoverMedia(onStoreChange: () => void) {
+  const query = window.matchMedia(HOVER_MEDIA);
+  query.addEventListener("change", onStoreChange);
+  return () => query.removeEventListener("change", onStoreChange);
+}
+
+const getCanHover = () => window.matchMedia(HOVER_MEDIA).matches;
+const getServerCanHover = () => false;
 
 function NavRow({
   href,
@@ -85,22 +96,20 @@ export function Sidebar() {
   const togglePinned = useUiStore((s) => s.togglePinned);
 
   const [hovered, setHovered] = useState(false);
-  const [canHover, setCanHover] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const canHover = useSyncExternalStore(
+    subscribeToHoverMedia,
+    getCanHover,
+    getServerCanHover,
+  );
 
-  useEffect(() => {
-    setMounted(true);
-    setCanHover(window.matchMedia("(hover: hover) and (pointer: fine)").matches);
-  }, []);
-
-  const expanded = mounted && (pinned || (canHover && hovered));
+  const expanded = pinned || (canHover && hovered);
   const width = expanded ? EXPANDED : COLLAPSED;
 
   const mainNav = useMemo(() => {
     const items = [
       { href: "/", icon: <LayoutGrid size={16} strokeWidth={1.75} />, label: "Browse", show: true, active: pathname === "/" && !activeRegion },
       { href: "/favorites", icon: <Heart size={16} strokeWidth={1.75} />, label: "Favorites", show: true, active: pathname === "/favorites" },
-      { href: "/sell", icon: <PlusCircle size={16} strokeWidth={1.75} />, label: "Post land", show: isLoggedIn, active: pathname === "/sell" },
+      { href: "/sell", icon: <PlusCircle size={16} strokeWidth={1.75} />, label: "Post land", show: isLoggedIn, active: pathname.startsWith("/sell") },
       { href: "/my-ads", icon: <LandPlot size={16} strokeWidth={1.75} />, label: "My ads", show: isLoggedIn, active: pathname === "/my-ads" },
       { href: "/profile", icon: <CircleUserRound size={16} strokeWidth={1.75} />, label: "Profile", show: isLoggedIn, active: pathname === "/profile" },
     ];
@@ -118,22 +127,25 @@ export function Sidebar() {
       onMouseLeave={() => setHovered(false)}
     >
       <div className="flex h-full flex-col px-2.5 py-3" style={{ width: EXPANDED }}>
-        <div className="mb-4 flex h-9 items-center">
-          <span className="flex size-9 shrink-0 items-center justify-center">
+        <div className="mb-4 flex h-11 items-center">
+          <div className="relative h-10 flex-1 overflow-hidden">
             <span
-              className="inline-block size-2 rounded-full"
-              style={{ background: "var(--pf-accent-default)" }}
-            />
-          </span>
-          <span
-            className="transition-opacity duration-200"
-            style={{ opacity: expanded ? 1 : 0 }}
-          >
-            <Link href="/" className="text-[17px] font-medium tracking-tight">
-              <span className="text-pf-text-primary">acre</span>
-              <span className="text-pf-wordmark">x</span>
-            </Link>
-          </span>
+              className={cn(
+                "absolute inset-y-0 left-0 w-9 items-center justify-center",
+                expanded ? "hidden" : "flex",
+              )}
+            >
+              <Logo size="md" markOnly />
+            </span>
+            <span
+              className={cn(
+                "absolute inset-y-0 left-0 items-center",
+                expanded ? "flex" : "hidden",
+              )}
+            >
+              <Logo size="md" />
+            </span>
+          </div>
           <button
             type="button"
             aria-label={pinned ? "Unpin sidebar" : "Pin sidebar"}
@@ -186,6 +198,13 @@ export function Sidebar() {
                 icon={<FileCheck2 size={16} strokeWidth={1.75} />}
                 label="Documents"
                 active={pathname === "/admin/documents"}
+                expanded={expanded}
+              />
+              <NavRow
+                href="/admin/analytics"
+                icon={<ChartNoAxesCombined size={16} strokeWidth={1.75} />}
+                label="Analytics"
+                active={pathname === "/admin/analytics"}
                 expanded={expanded}
               />
             </nav>

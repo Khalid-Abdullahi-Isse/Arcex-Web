@@ -33,7 +33,7 @@ export default function AdminPendingListingsPage() {
         <h1 className="text-pf-text-primary">Pending listings</h1>
         <p className="mt-1 text-[14px] text-pf-text-tertiary">
           Review title documents before approving — verified listings are the
-          whole point of acrex.
+          whole point of AcreX.
         </p>
       </div>
 
